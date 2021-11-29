@@ -1,6 +1,7 @@
 {
   "name": "---name---",
   "version": "1.0.0",
+  "files": ["dist", "src"],
   "main": "dist/index.js",
   "typings": "dist/types",
   "license": "MIT",
