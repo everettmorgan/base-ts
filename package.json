@@ -15,7 +15,9 @@
     "tsc": "./node_modules/typescript/bin/tsc",
     "test": "yarn linter && yarn tests",
     "linter": "yarn run eslint --ext .ts src/",
-    "tests": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ./node_modules/ts-node/register/index.js 'tests/**/*.ts'"
+    "tests": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ./node_modules/ts-node/register/index.js 'tests/**/*.ts'",
+    "test-publish": "npm publish --dry-run",
+    "publish": "npm publish"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
