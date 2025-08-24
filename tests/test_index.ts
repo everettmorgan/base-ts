@@ -1,17 +1,7 @@
-/* eslint-disable
-no-undef,
-no-unused-vars,
-prefer-arrow-callback,
-import/no-unresolved,
-import/extensions
-*/
-
+import 'chai-as-promised';
 import * as chai from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
 
 const { expect } = chai;
-
-chai.use(chaiAsPromised);
 
 describe('A test', function() {
   it ('can do something', function() {
