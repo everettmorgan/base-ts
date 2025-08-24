@@ -38,9 +38,10 @@ jobs:
         languages: ${{ matrix.language }}
 
     - run: |
-       corepack enable && corepack prepare yarn@stable --activate
-       yarn install --immutable
-       yarn tsc
+        npm install -g yarn@4.9.3
+        corepack enable && corepack prepare yarn@stable --activate
+        yarn install --immutable
+        yarn tsc
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
