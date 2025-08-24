@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "yarn run eslint --ext .ts src/",
     "test": "yarn lint && yarn tests",
-    "tests": "yarn nyc --reporter=html --reporter=text yarn mocha -r ts-node/register 'tests/**/*.ts'",
+    "tests": "yarn nyc --reporter=html --reporter=text yarn mocha -r ts-node/register --extension ts 'tests/**/*.ts'",
     "test-publish": "npm publish --dry-run",
     "publish": "npm publish"
   },
