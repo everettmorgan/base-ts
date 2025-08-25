@@ -26,4 +26,4 @@ jobs:
     - run: |
         yarn install --immutable
         yarn tsc
-        NODE_OPTIONS=--loader=ts-node/esm yarn test
+        yarn test
