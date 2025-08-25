@@ -45,17 +45,17 @@ module.exports = [
       import: require('eslint-plugin-import'),
     },
     rules: {
-      'import/no-extraneous-dependencies': 'off',
-      'import/prefer-default-export': 'off',
-      'no-unused-vars': 'off',
+      'import/no-extraneous-dependencies': 'warn',
+      'import/prefer-default-export': 'warn',
+      'no-unused-vars': 'warn',
       "no-undef": "warn",
-      "class-methods-use-this": "off",
-      "max-classes-per-file": "off",
+      "class-methods-use-this": "warn",
+      "max-classes-per-file": "warn",
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_' },
       ],
-      'no-console': 'off',
+      'no-console': 'warn',
     },
     settings: {
       'import/resolver': {
