@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "yarn run eslint --ext .ts src/",
     "test": "yarn lint && yarn tests",
-    "tests": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' node ./node_modules/nyc/bin/nyc.js --reporter=html --reporter=text mocha -r ./node_modules/ts-node/register/index.js 'tests/**/*.ts'",
+    "tests": "yarn nyc --reporter=html --reporter=text mocha -r ts-node/register --extension ts 'tests/**/*.ts'",
     "test-publish": "npm publish --dry-run",
     "publish": "npm publish"
   },
