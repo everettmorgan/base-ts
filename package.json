@@ -16,7 +16,7 @@
   },
   "sideEffects": false,
   "license": "MIT",
-  "description": "---description---",
+  "description": "A minimal starter for small TypeScript libraries and packages.",
   "repository": {
     "type": "git",
     "url": "---repo---"

@@ -1,12 +1,10 @@
-# Base TypeScript Project _(`base-ts` / `---name---`)_
+# Base TypeScript Project _(`base-ts`)_
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
----description---
-
 A minimal starter for small TypeScript libraries and packages.
 
-This repository uses TypeScript, Vitest, ESLint flat config, Yarn 4, and GitHub Actions to provide a small CommonJS library template. The package identity fields intentionally remain placeholders (`---name---`, `---description---`, and `---repo---`) until real package metadata is provided, so the README title includes both the repository name and placeholder package name.
+This repository uses TypeScript, Vitest, ESLint flat config, Yarn 4, and GitHub Actions to provide a small CommonJS library template. The package name and repository URL intentionally remain placeholders (`---name---` and `---repo---`) until real package metadata is provided.
 
 ## Table of Contents
 
@@ -91,12 +89,11 @@ GitHub Actions runs on pushes, pull requests, merge queues, and manual dispatche
 
 ## Publishing
 
-Before publishing, replace the placeholders in `package.json`:
+Before publishing, replace the package identity placeholders in `package.json`:
 
 ```json
 {
   "name": "---name---",
-  "description": "---description---",
   "repository": {
     "type": "git",
     "url": "---repo---"
