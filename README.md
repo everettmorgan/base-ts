@@ -2,7 +2,7 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-A minimal starter for small TypeScript libraries and packages.
+> A minimal starter for small TypeScript libraries and packages.
 
 This repository uses TypeScript, Vitest, ESLint flat config, Yarn 4, and GitHub Actions to provide a small CommonJS library template. The package name and repository URL intentionally remain placeholders (`---name---` and `---repo---`) until real package metadata is provided.
 
