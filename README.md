@@ -58,7 +58,7 @@ View coverage (after running tests):
   ```bash
   yarn test
   ```
-- **test-publish**: Dry-run the publish step to verify package contents.
+- **test-publish**: Dry-run the package step to verify package contents.
   ```bash
   yarn test-publish
   ```
@@ -90,7 +90,7 @@ Before publishing, update placeholders in `package.json`:
   }
 }
 ```
-- Dry-run:
+- Package dry-run:
   ```bash
   yarn test-publish
   ```
