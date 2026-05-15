@@ -8,7 +8,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze (javascript)
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -23,8 +23,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24.x
-          cache: yarn
-          cache-dependency-path: yarn.lock
 
       - name: Enable Corepack
         run: |
