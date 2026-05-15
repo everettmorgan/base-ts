@@ -78,6 +78,13 @@ View coverage (after running tests):
 - `vitest.config.ts` — Vitest test and coverage configuration
 - `package.json` — Project metadata & scripts
 
+## Continuous integration
+GitHub Actions runs on pushes, pull requests, merge queues, and manual dispatches.
+
+- **Node.js CI** runs on Node.js 22, 24, and 26. Each job installs with Corepack-managed Yarn 4.14.1, then runs linting, typechecking, Vitest coverage, builds, and a package dry-run. The Node.js 24 job also runs `yarn npm audit --recursive --all`.
+- **CodeQL** analyzes JavaScript and TypeScript with the extended security and quality query packs after an install and build.
+- **Dependabot** checks npm and GitHub Actions updates weekly and groups related update pull requests.
+
 ## Publishing
 Before publishing, update placeholders in `package.json`:
 ```json

@@ -31,7 +31,7 @@
     "prepack": "yarn build",
     "release": "npm publish",
     "test": "yarn lint && yarn typecheck && yarn tests",
-    "test-publish": "npm pack --dry-run",
+    "test-publish": "npm pack --dry-run --cache .npm",
     "tests": "vitest run --coverage",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },

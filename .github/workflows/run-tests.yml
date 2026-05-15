@@ -5,14 +5,26 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  merge_group:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
+  YARN_VERSION: 4.14.1
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
 
     strategy:
+      fail-fast: false
       matrix:
         node-version: [22.x, 24.x, 26.x]
 
@@ -28,10 +40,15 @@ jobs:
       - name: Enable Corepack
         run: |
           corepack enable
-          corepack prepare yarn@4.14.1 --activate
+          corepack prepare yarn@${YARN_VERSION} --activate
+          test "$(yarn --version)" = "${YARN_VERSION}"
 
       - name: Install dependencies
         run: yarn install --immutable
+
+      - name: Audit dependencies
+        if: matrix.node-version == '24.x'
+        run: yarn npm audit --recursive --all
 
       - name: Lint
         run: yarn lint
