@@ -2,45 +2,52 @@
   "name": "---name---",
   "version": "1.0.0",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
+  "type": "commonjs",
   "main": "dist/index.js",
-  "typings": "dist/types",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
   "license": "MIT",
   "description": "---description---",
-  "repository": "---repo---",
-  "author": "Everett Morgan",
-  "scripts": {
-    "lint": "yarn run eslint --ext .ts src/",
-    "test": "yarn lint && yarn tests",
-    "tests": "nyc --reporter=html --reporter=text mocha -r ts-node/register --extension ts 'tests/**/*.ts'",
-    "test-publish": "npm publish --dry-run",
-    "publish": "npm publish"
+  "repository": {
+    "type": "git",
+    "url": "---repo---"
   },
-  "dependencies": {
-    "dotenv": "^17.2.1",
-    "uuid": "^11.1.0"
+  "author": "Everett Morgan",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint . --max-warnings=0",
+    "prepack": "yarn build",
+    "release": "npm publish",
+    "test": "yarn lint && yarn typecheck && yarn tests",
+    "test-publish": "npm publish --dry-run",
+    "tests": "vitest run --coverage",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/chai": "^5.2.2",
-    "@types/chai-as-promised": "^8.0.2",
-    "@types/dotenv": "^8.2.3",
-    "@types/jest": "^30.0.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "^24.3.0",
-    "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.40.0",
-    "@typescript-eslint/parser": "^8.40.0",
-    "chai": "^6.0.1",
-    "chai-as-promised": "^8.0.2",
-    "eslint": "^9.34.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.32.0",
-    "mocha": "^11.7.1",
-    "nyc": "^17.1.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.8.0",
+    "@vitest/coverage-v8": "^4.1.6",
+    "eslint": "^10.3.0",
+    "globals": "^17.6.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.3",
+    "vitest": "^4.1.6"
   },
-  "packageManager": "yarn@4.9.3+sha512.8295ee814f6b253e16f516416481b481a215ed03ef1ae38524d108084872560a9ed75aeb23b91ab64222062ac4149a594150ae538c2a9536fdbcefd4e49b11cc"
+  "resolutions": {
+    "flatted@npm:^3.2.9": "npm:3.4.2",
+    "semver@npm:^6.0.0": "npm:6.3.1"
+  },
+  "packageManager": "yarn@4.14.1"
 }

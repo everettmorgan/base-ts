@@ -9,27 +9,43 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     strategy:
       matrix:
-        node-version: [22.x, 24.x]
+        node-version: [22.x, 24.x, 26.x]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    
-    - name: Enable Corepack
-      run: |
-        corepack enable && corepack prepare yarn@stable --activate
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-    
-    - name: Run tests
-      run: |
-        yarn install --immutable
-        yarn tsc
-        yarn test
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare yarn@4.14.1 --activate
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Typecheck
+        run: yarn typecheck
+
+      - name: Test
+        run: yarn tests
+
+      - name: Build
+        run: yarn build
+
+      - name: Verify package
+        run: yarn test-publish

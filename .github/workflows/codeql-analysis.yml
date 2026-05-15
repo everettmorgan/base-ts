@@ -15,34 +15,32 @@ jobs:
       contents: read
       security-events: write
 
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'javascript', 'typescript' ]
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-    - name: Enable Corepack
-      run: |
-        corepack enable && corepack prepare yarn@stable --activate
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: yarn
+          cache-dependency-path: yarn.lock
 
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22.x'
-        cache: 'yarn'
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare yarn@4.14.1 --activate
 
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: ${{ matrix.language }}
+      - name: Install dependencies
+        run: yarn install --immutable
 
-    - name: Run Typescript compiler
-      run: |
-        yarn install --immutable
-        yarn tsc
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+      - name: Build
+        run: yarn build
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3

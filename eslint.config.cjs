@@ -1,66 +1,50 @@
-const { FlatCompat } = require('@eslint/eslintrc');
+const js = require('@eslint/js');
+const globals = require('globals');
+const tseslint = require('typescript-eslint');
 
-const compat = new FlatCompat();
-
-module.exports = [
-  ...compat.extends('airbnb-base'),
-
-  { ignores: ['dist/**', 'node_modules/**', 'eslint.config.cjs'] },
-
+module.exports = tseslint.config(
   {
-    files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
+    ignores: [
+      'coverage/**',
+      'dist/**',
+      'node_modules/**',
+      '.yarn/**',
+    ],
+  },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{js,cjs,mjs}'],
     languageOptions: {
-      parserOptions: {
-        ecmaVersion: 2020,
-        sourceType: 'module',
-      },
-    },
-    plugins: {
-      import: require('eslint-plugin-import'),
+      ecmaVersion: 'latest',
+      sourceType: 'commonjs',
+      globals: globals.node,
     },
     rules: {
-      'no-console': 'off',
-      'import/extensions': ['error', 'ignorePackages', { js: 'never' }],
-    },
-    settings: {
-      'import/resolver': {
-        node: { extensions: ['.js', '.ts'] },
-      },
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
-  
   {
     files: ['**/*.ts'],
     languageOptions: {
-      parser: require('@typescript-eslint/parser'),
-      parserOptions: {
-        project: './tsconfig.json',
-        tsconfigRootDir: __dirname,
-        ecmaVersion: 5,
-        sourceType: 'module',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
-      import: require('eslint-plugin-import'),
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: globals.node,
     },
     rules: {
-      'import/no-extraneous-dependencies': 'warn',
-      'import/prefer-default-export': 'warn',
-      'no-unused-vars': 'warn',
-      "no-undef": "warn",
-      "class-methods-use-this": "warn",
-      "max-classes-per-file": "warn",
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        { fixStyle: 'inline-type-imports' },
+      ],
       '@typescript-eslint/no-unused-vars': [
         'error',
-        { argsIgnorePattern: '^_' },
+        {
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
       ],
       'no-console': 'warn',
     },
-    settings: {
-      'import/resolver': {
-        node: { extensions: ['.js', '.ts'] },
-      },
-    },
   },
-];
+);
