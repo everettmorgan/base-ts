@@ -1,0 +1,31 @@
+name: Bug Report
+description: Report a reproducible problem in this starter template.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the problem and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: List the smallest steps needed to reproduce the problem.
+      placeholder: |
+        1. Run `yarn install`
+        2. Run `yarn test`
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include Node.js, Yarn, operating system, and any relevant tool versions.
+    validations:
+      required: true

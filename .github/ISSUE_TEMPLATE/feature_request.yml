@@ -1,0 +1,20 @@
+name: Feature Request
+description: Suggest an improvement to this starter template.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the improvement and why it belongs in this template.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Describe the proposed behavior, tradeoffs, and alternatives.
+    validations:
+      required: true
