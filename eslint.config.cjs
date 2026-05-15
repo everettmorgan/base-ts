@@ -7,6 +7,8 @@ module.exports = tseslint.config(
     ignores: [
       'coverage/**',
       'dist/**',
+      '.npm/**',
+      '.nyc_output/**',
       'node_modules/**',
       '.yarn/**',
     ],
