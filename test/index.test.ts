@@ -1,4 +1,4 @@
-import '../src/index';
+import '../src/index.js';
 
 import { describe, expect, it } from 'vitest';
 
