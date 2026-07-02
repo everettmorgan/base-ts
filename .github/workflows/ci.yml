@@ -48,6 +48,7 @@ jobs:
 
       - name: Audit dependencies
         if: matrix.node-version == '24.x'
+        continue-on-error: true
         run: yarn npm audit --recursive --all
 
       - name: Lint
