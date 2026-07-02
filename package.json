@@ -4,14 +4,20 @@
   "files": [
     "dist"
   ],
-  "type": "commonjs",
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "require": "./dist/index.js",
-      "default": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "sideEffects": false,
@@ -26,9 +32,8 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "yarn clean:dist && tsc -p tsconfig.build.json",
+    "build": "tsup",
     "clean": "rm -rf coverage dist",
-    "clean:dist": "rm -rf dist",
     "lint": "eslint . --max-warnings=0",
     "prepack": "yarn build",
     "release": "npm publish",
@@ -43,6 +48,7 @@
     "@vitest/coverage-v8": "^4.1.9",
     "eslint": "^10.6.0",
     "globals": "^17.7.0",
+    "tsup": "^8.5.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.62.1",
     "vitest": "^4.1.9"
