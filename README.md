@@ -4,7 +4,7 @@
 
 > A minimal starter for small TypeScript libraries and packages.
 
-This repository uses TypeScript, Vitest, ESLint flat config, Yarn 4, and GitHub Actions to provide a small CommonJS library template. The package name and repository URL intentionally remain placeholders (`---name---` and `---repo---`) until real package metadata is provided.
+This repository uses TypeScript, tsup, Vitest, ESLint flat config, Yarn 4, and GitHub Actions to provide a small dual-format library template that publishes both ESM and CommonJS builds. The package name and repository URL intentionally remain placeholders (`---name---` and `---repo---`) until real package metadata is provided.
 
 ## Table of Contents
 
@@ -31,19 +31,20 @@ yarn install
 
 ## Usage
 
-Build the CommonJS output and load the root entrypoint:
+Build the package (ESM, CommonJS, and type declarations) into `dist/`:
 
 ```sh
 yarn build
-node -e "require('./dist')"
 ```
 
-Consumers should import only the published root entrypoint:
+The package ships both module formats, and the consumer's tooling resolves the right one automatically through the `exports` map:
 
 ```js
-const library = require('---name---');
+// ESM
+import * as library from '---name---';
 
-console.log(library);
+// CommonJS
+const library = require('---name---');
 ```
 
 Deep imports from `src/` or internal `dist/` paths are not part of the public package contract.
@@ -52,12 +53,11 @@ Deep imports from `src/` or internal `dist/` paths are not part of the public pa
 
 - `src/` - TypeScript source files.
 - `test/` - Vitest tests.
-- `dist/` - Generated CommonJS output.
-- `dist/types/` - Generated declaration files.
+- `dist/` - Generated output: `index.js` (ESM), `index.cjs` (CommonJS), and matching `index.d.ts` / `index.d.cts` declarations.
 - `coverage/` - Generated Vitest coverage reports.
 - `tsconfig.base.json` - Shared TypeScript strictness and runtime settings.
 - `tsconfig.json` - Development typecheck project for `src/` and `test/`.
-- `tsconfig.build.json` - Build-only TypeScript project for published output.
+- `tsup.config.ts` - Build configuration (ESM + CommonJS bundles and declarations).
 - `eslint.config.cjs` - ESLint flat config.
 - `vitest.config.ts` - Vitest test and coverage configuration.
 
@@ -75,7 +75,7 @@ Useful scripts:
 - `yarn lint` - lint the project with ESLint.
 - `yarn typecheck` - typecheck source and tests without emitting files.
 - `yarn tests` - run Vitest with V8 coverage.
-- `yarn build` - compile TypeScript to CommonJS in `dist/`.
+- `yarn build` - bundle ESM + CommonJS output and type declarations into `dist/` with tsup.
 - `yarn test-publish` - run a package dry-run with the generated output.
 
 ## Continuous Integration
@@ -117,7 +117,7 @@ yarn release
 
 This starter does not export a library API yet. Add public exports from `src/index.ts` when real package behavior is introduced.
 
-The published package surface is the root entrypoint only through `exports["."]`.
+The published package surface is the root entrypoint only, through `exports["."]`, which exposes both `import` and `require` conditions with their matching type declarations.
 
 ## Maintainers
 
