@@ -54,6 +54,7 @@
     "vitest": "^4.1.9"
   },
   "resolutions": {
+    "esbuild": "0.28.1",
     "flatted@npm:^3.2.9": "npm:3.4.2",
     "semver@npm:^6.0.0": "npm:6.3.1"
   },
